@@ -61,7 +61,7 @@ A loose coupling is preferable
 * coincindental cohesion: used as container for various unrelated methods.
 
 It also has a high coupling, because it directly access an attribute of another
-object, breaking the encapsulation principle.
+object, breaking the encapsulation principle. Content coupling
 
 ### Fish.java
 
@@ -69,7 +69,17 @@ object, breaking the encapsulation principle.
   1 class to group data relative to a fish.
 * Subclass (interface coupling)
 
-###
+### Fishbowl
 
-* 
+* Communicational and informational cohesion: everything that's inside works on
+  the same data.
+* Coupling with the List and Fish classes (external coupling ?)
 
+### SmartFish
+
+* Coupling with fish (subclass coupling)
+
+### Main
+
+* Couplé à tout et n'importe quoi !!!
+* Mais respecte l'encapsulation (pas de content coupling) external coupling
