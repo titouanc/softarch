@@ -56,8 +56,20 @@ A loose coupling is preferable
 
 ## 
 
-The DemoUtils.java file is a perfect example of coincindental cohesion
-This file is used as container for various unrelated methods.
+### DemoUtils.java
+
+* coincindental cohesion: used as container for various unrelated methods.
 
 It also has a high coupling, because it directly access an attribute of another
 object, breaking the encapsulation principle.
+
+### Fish.java
+
+* communicatonal cohesion because everything is grouped in the Fish class only
+  1 class to group data relative to a fish.
+* Subclass (interface coupling)
+
+###
+
+* 
+
