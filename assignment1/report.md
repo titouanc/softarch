@@ -82,4 +82,5 @@ object, breaking the encapsulation principle. Content coupling
 ### Main
 
 * Couplé à tout et n'importe quoi !!!
-* Mais respecte l'encapsulation (pas de content coupling) external coupling
+* Mais respecte l'encapsulation (pas de content coupling)
+  external coupling, common coupling
