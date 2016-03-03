@@ -17,7 +17,15 @@ the type of processor to be created. This is therefore a creational pattern.
 
 ## The Observer pattern
 
-* Demo 11 (but weather should explicitely implement the Obervable interface)
+We observed the observer pattern in the package `Demo11`. However, the package
+contains the `Observer` and `Observable` interfaces that are not used. The
+pattern is directly implemented in the `Weather` class, which is observable, 
+and therefore keep tracks of all the `WeatherObserver` to be notified when
+the weather changes. Finally, the `Country` class povide a concrete
+of the `WeatherObserver` interface, and is notified everytime the weather it
+observes changes.
+
+![Demo11 UML](demo11.eps).
 
 
 ## The Adapter pattern
