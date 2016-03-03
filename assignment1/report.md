@@ -34,55 +34,51 @@ The Adapter pattern could be seen in the `Demo13` package.
 
 The `Demo16` contains a Strategy pattern, which is a behavorial pattern.
 
-`PitchType` is an abstract Strategy. `CutterFastBall`, `FoshChangeup` and `SliderBreakingBall` are concrete strategies. `Pitcher` is the context that can change strategies but has no idea of the current underlying strategy.
+`PitchType` is an abstract Strategy. `CutterFastBall`, `FoshChangeup` and `SliderBreakingBall` are concrete strategies. `Pitcher` is the context that can change strategies but has no idea of the current underlying strategy thanks to polymorphism.
 
-The idea here is that `Pitcher` has several ways to pitch (i.e. Strategies) and must choose one depending on the context. He has a method that allows him to change his pitch when context change and not know the current pitch. Because only the pitch type must change when the context change, inheriting several classes of `Pitcher` would not be logical. Instead, only classes of `PitchType` are inherited.
+![Demo16 UML](demo16.eps).
+
+The idea here is that `Pitcher` has several ways to pitch (i.e. Strategies) and must choose one depending on the context. He has a method that allows him to change his pitch when context change and not know the current pitch. Because only the pitch type must change when the context change, inheriting several classes of `Pitcher` would not be logical. Instead, a Strategy design pattern is used where only the pitch type is changed when the context changes.
 
 
 
 # Exercise 3
 
-## Which is preferable: high or low wohesion ?
+## Which is preferable: high or low cohesion ?
 
-A high cohesion is preferable.
-
-* DRY
-* Functional cohesion (small units, KISS)
+A high cohesion is preferable because it allows to have logically coherent features in the same module and reuse them. It is also easier to maintain and debug because each part of the program does a specific thing and is responsible of specific features.
 
 
 ## Which is preferable: tight or loose coupling ?
 
-A loose coupling is preferable
+A loose coupling is preferable because small independant parts of programs are more reliable and easier testable. It is also easier to refactor code if the different parts do not depend on each other or rely on a fixed API.
 
-* Complexity of interdependances
-
-## 
+## Analyse the source code of exercise3.demo17
 
 ### DemoUtils.java
 
-* coincindental cohesion: used as container for various unrelated methods.
+* Coincidental cohesion because this class is used as a container for various unrelated methods.
 
-It also has a high coupling, because it directly access an attribute of another
-object, breaking the encapsulation principle. Content coupling
+* Content coupling (high) because it directly accesses an attribute of another
+class (`FishBowl`), breaking the encapsulation principle.
 
 ### Fish.java
 
-* communicatonal cohesion because everything is grouped in the Fish class only
-  1 class to group data relative to a fish.
-* Subclass (interface coupling)
+* Communicational cohesion because this module group every data related to a `Fish`.
+* Subclass (interface) coupling because the only dependency to another class is through the implementation of the `Serializable` interface
 
 ### Fishbowl
 
-* Communicational and informational cohesion: everything that's inside works on
-  the same data.
-* Coupling with the List and Fish classes (external coupling ?)
+* Communicational and informational cohesion because the module groups data and methods related to a `List<Fish>`
+* Coupling with the List and Fish classes (external coupling ?)??????????????????????????????????????? je dirais message coupling en relisant https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29 mais pas sur du tout
 
 ### SmartFish
 
-* Coupling with fish (subclass coupling)
+* Communicational cohesion because this module group every data related to a `SmartFish`.
+* Subclass coupling with `Fish`
 
 ### Main
 
-* Procedural cohesion (order in which we have to call the methods)
+* Procedural cohesion because methods are called in the order they need to be.
 * Mais respecte l'encapsulation (pas de content coupling)
-  external coupling, common coupling
+  external coupling, common coupling??????????????????????????,
