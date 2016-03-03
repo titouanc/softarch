@@ -66,17 +66,17 @@ A loose coupling is preferable because small independant parts of programs are m
 
 * Coincidental cohesion because this class is used as a container for various unrelated methods.
 
-* Content coupling (high) because it directly accesses an attribute of another
+* Content coupling because it directly accesses an attribute of another
 class (`FishBowl`), breaking the encapsulation principle.
 
 ### Fish
 
-* Communicational cohesion because this module group every data related to a `Fish`.
+* Communicational cohesion because this module groups data related to a `Fish`.
 * Subclass (interface) coupling because the only dependency to another class is through the implementation of the `Serializable` interface
 
 ### Fishbowl
 
-* Communicational and informational cohesion because the module groups data and methods related to a `List<Fish>`
+* Communicational cohesion because the module groups data and methods related to a `List<Fish>`
 * Coupling with the List and Fish classes (external coupling ?)??????????????????????????????????????? je dirais message coupling en relisant https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29 mais pas sur du tout
 
 ### SmartFish
