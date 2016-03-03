@@ -18,7 +18,8 @@ pattern is directly implemented in the `Weather` class, which is observable,
 and therefore keep tracks of all the `WeatherObserver` to be notified when
 the weather changes. Finally, the `Country` class provide a concrete
 of the `WeatherObserver` interface, and is notified everytime the weather it
-observes changes.
+observes changes. This is a behavioral pattern, because it define how the
+program flow is spread across objects.
 
 ![Demo11 UML](demo11.eps)
 
@@ -30,7 +31,8 @@ a `RacerPlace` interface, which declares 2 methods `fly` and `flipAndMore`.
 We also have a `CropDusterPlane` class which defines 2 methods `fly` and `fumigate`.
 In order to use a `CropDusterPlane` object in a plane race, we need to adapt it
 with the `Dusty` class, which encapsulate the right method dispatching on the
-CropDusterPlane.
+CropDusterPlane. This is a structural pattern, because it defines how the
+responsibilities are dispatched between the different classes.
 
 ![Demo13 UML](demo13.eps)
 
