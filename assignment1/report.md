@@ -76,16 +76,15 @@ class (`FishBowl`), breaking the encapsulation principle.
 
 ### Fishbowl
 
-* Communicational cohesion because the module groups data and methods related to a `List<Fish>`
-* Coupling with the List and Fish classes (external coupling ?)??????????????????????????????????????? je dirais message coupling en relisant https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29 mais pas sur du tout
+* Communicational cohesion because the module groups data and methods related to a list of `Fish`
+* The use of the `List` and `Fish` classes introduces external coupling
 
 ### SmartFish
 
 * Communicational cohesion because this module group every data related to a `SmartFish`.
 * Subclass coupling with `Fish`
 
-### Main
+### Main (Demo17)
 
-* Procedural cohesion because methods are called in the order they need to be.
-* Mais respecte l'encapsulation (pas de content coupling)
-  external coupling, common coupling??????????????????????????,
+* Procedural cohesion because methods are called in the order they need to be
+* `Main` is only message coupled to barely all the other classes of the package
