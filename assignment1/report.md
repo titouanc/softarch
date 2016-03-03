@@ -7,12 +7,7 @@ In the demo, the `Corei(5|7)Factory` creates an object that implements the
 `Processor` interface. This particular construct allows to dynamically change
 the type of processor to be created. This is therefore a creational pattern.
 
-
 ![Demo1 UML](demo1.eps)
-
-## The Facade pattern
-
-* Demo 10
 
 
 ## The Observer pattern
@@ -25,24 +20,14 @@ the weather changes. Finally, the `Country` class provide a concrete
 of the `WeatherObserver` interface, and is notified everytime the weather it
 observes changes.
 
-![Demo11 UML](demo11.eps).
+![Demo11 UML](demo11.eps)
 
 
 ## The Adapter pattern
 
-* Demo 13 (?) Dusty adapts cropDuster to RacerPlane
+The Adapter pattern could be seen in the `Demo13` package. 
 
-
-## The Visitor pattern
-
-* Demo 2 But actually doesn't make sense because different visit functions
-
-
-## Others
-
-* Demo 3 is a Bridge Pattern
-* Demo 4 is a Builder
-* Demo 7 is a Composite
+![Demo13 UML](demo13.eps)
 
 
 # Exercise 2
