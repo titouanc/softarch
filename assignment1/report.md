@@ -1,9 +1,14 @@
 # Exercise 1
 
-## The Factory pattern
+## The Factory Method pattern
 
-* Demo1 c'est clairement ça
+We found an instance of the Factory Method pattern in the package `Demo1`.
+In the demo, the `Corei(5|7)Factory` creates an object that implements the
+`Processor` interface. This particular construct allows to dynamically change
+the type of processor to be created. This is therefore a creational pattern.
 
+
+![Demo1 UML](demo1.eps)
 
 ## The Facade pattern
 
@@ -81,6 +86,6 @@ object, breaking the encapsulation principle. Content coupling
 
 ### Main
 
-* Couplé à tout et n'importe quoi !!!
+* Procedural cohesion (order in which we have to call the methods)
 * Mais respecte l'encapsulation (pas de content coupling)
   external coupling, common coupling
