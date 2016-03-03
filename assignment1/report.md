@@ -68,33 +68,32 @@ A high cohesion is preferable because it allows to have logically coherent featu
 
 A loose coupling is preferable because small independant parts of programs are more reliable and easier testable. It is also easier to refactor code if the different parts do not depend on each other or rely on a fixed API.
 
-## 
+## Analyse the source code of exercise3.demo17
 
 ### DemoUtils.java
 
-* coincindental cohesion: used as container for various unrelated methods.
+* Coincidental cohesion because this class is used as a container for various unrelated methods.
 
-It also has a high coupling, because it directly access an attribute of another
-object, breaking the encapsulation principle. Content coupling
+* Content coupling (high) because it directly accesses an attribute of another
+class (`FishBowl`), breaking the encapsulation principle.
 
 ### Fish.java
 
-* communicatonal cohesion because everything is grouped in the Fish class only
-  1 class to group data relative to a fish.
-* Subclass (interface coupling)
+* Communicational cohesion because this module group every data related to a `Fish`.
+* Subclass (interface) coupling because the only dependency to another class is through the implementation of the `Serializable` interface
 
 ### Fishbowl
 
-* Communicational and informational cohesion: everything that's inside works on
-  the same data.
-* Coupling with the List and Fish classes (external coupling ?)
+* Communicational and informational cohesion because the module groups data and methods related to a `List<Fish>`
+* Coupling with the List and Fish classes (external coupling ?)??????????????????????????????????????? je dirais message coupling en relisant https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29 mais pas sur du tout
 
 ### SmartFish
 
-* Coupling with fish (subclass coupling)
+* Communicational cohesion because this module group every data related to a `SmartFish`.
+* Subclass coupling with `Fish`
 
 ### Main
 
-* Procedural cohesion (order in which we have to call the methods)
+* Procedural cohesion because methods are called in the order they need to be.
 * Mais respecte l'encapsulation (pas de content coupling)
-  external coupling, common coupling
+  external coupling, common coupling??????????????????????????,
