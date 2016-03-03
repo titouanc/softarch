@@ -3,7 +3,7 @@ FIGURES = $(subst .dia,.eps,$(wildcard *.dia))
 Antoine-Carpentier_Titouan-Christophe_1.pdf: main.pdf
 	mv $< $@
 
-%.pdf: %.tex %.bib report.tex ${FIGURES}
+%.pdf: %.tex report.tex ${FIGURES}
 	pdflatex $<
 	# bibtex $(subst .tex,,$<)
 	# pdflatex $<

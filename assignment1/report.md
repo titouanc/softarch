@@ -47,7 +47,11 @@ observes changes.
 
 # Exercise 2
 
-Strategy patterns (Behavioural)
+The `Demo16` contains a Strategy pattern, which is a behavorial pattern.
+
+`PitchType` is an abstract Strategy. `CutterFastBall`, `FoshChangeup` and `SliderBreakingBall` are concrete strategies. `Pitcher` is the context that can change strategies but has no idea of the current underlying strategy.
+
+The idea here is that `Pitcher` has several ways to pitch (i.e. Strategies) and must choose one depending on the context. He has a method that allows him to change his pitch when context change and not know the current pitch. Because only the pitch type must change when the context change, inheriting several classes of `Pitcher` would not be logical. Instead, only classes of `PitchType` are inherited.
 
 
 
