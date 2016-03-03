@@ -59,19 +59,14 @@ The idea here is that `Pitcher` has several ways to pitch (i.e. Strategies) and 
 
 # Exercise 3
 
-## Which is preferable: high or low wohesion ?
+## Which is preferable: high or low cohesion ?
 
-A high cohesion is preferable.
-
-* DRY
-* Functional cohesion (small units, KISS)
+A high cohesion is preferable because it allows to have logically coherent features in the same module and reuse them. It is also easier to maintain and debug because each part of the program does a specific thing and is responsible of specific features.
 
 
 ## Which is preferable: tight or loose coupling ?
 
-A loose coupling is preferable
-
-* Complexity of interdependances
+A loose coupling is preferable because small independant parts of programs are more reliable and easier testable. It is also easier to refactor code if the different parts do not depend on each other or rely on a fixed API.
 
 ## 
 
