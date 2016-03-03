@@ -62,14 +62,14 @@ A loose coupling is preferable because small independant parts of programs are m
 
 ## Analyse the source code of exercise3.demo17
 
-### DemoUtils.java
+### DemoUtils
 
 * Coincidental cohesion because this class is used as a container for various unrelated methods.
 
 * Content coupling (high) because it directly accesses an attribute of another
 class (`FishBowl`), breaking the encapsulation principle.
 
-### Fish.java
+### Fish
 
 * Communicational cohesion because this module group every data related to a `Fish`.
 * Subclass (interface) coupling because the only dependency to another class is through the implementation of the `Serializable` interface
