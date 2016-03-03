@@ -25,7 +25,12 @@ observes changes.
 
 ## The Adapter pattern
 
-The Adapter pattern could be seen in the `Demo13` package. 
+The Adapter pattern could be seen in the `Demo13` package. In this case, we have
+a `RacerPlace` interface, which declares 2 methods `fly` and `flipAndMore`.
+We also have a `CropDusterPlane` class which defines 2 methods `fly` and `fumigate`.
+In order to use a `CropDusterPlane` object in a plane race, we need to adapt it
+with the `Dusty` class, which encapsulate the right method dispatching on the
+CropDusterPlane.
 
 ![Demo13 UML](demo13.eps)
 
