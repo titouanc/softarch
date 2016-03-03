@@ -21,7 +21,7 @@ We observed the observer pattern in the package `Demo11`. However, the package
 contains the `Observer` and `Observable` interfaces that are not used. The
 pattern is directly implemented in the `Weather` class, which is observable, 
 and therefore keep tracks of all the `WeatherObserver` to be notified when
-the weather changes. Finally, the `Country` class povide a concrete
+the weather changes. Finally, the `Country` class provide a concrete
 of the `WeatherObserver` interface, and is notified everytime the weather it
 observes changes.
 
