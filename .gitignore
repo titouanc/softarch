@@ -1,1 +1,10 @@
 *.class
+*.metadata/
+assignment2/RemoteSystemsTempFiles/
+assignment2/web_portal/.DS_Store
+assignment2/web_portal/.classpath
+assignment2/web_portal/.project
+assignment2/web_portal/.settings/
+assignment2/web_portal/DB/
+assignment2/web_portal/WebContent/
+assignment2/web_portal/web_portal.xsl
