@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Iterator;
 
+/** THIS IS A TEST **/
+
 /**
  * This abstract class implements the behaviour that is to be shared
  * by all databases.
