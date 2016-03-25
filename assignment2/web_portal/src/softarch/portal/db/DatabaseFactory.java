@@ -38,10 +38,18 @@ public class DatabaseFactory {
 			throw new DatabaseException("Missing user information for database");
 		}
 		String userSplitted[] = userInfo.split(":");
+		String username, password;
+		if (userSplitted.length == 2){
+			username = userSplitted[0];
+			password = userSplitted[1];
+		} else {
+			username = userSplitted[0];
+			password = "";
+		}
 		
 		try {
 			Constructor<? extends SQLDatabase> constr = cls.getConstructor(String.class, String.class, String.class);
-			return constr.newInstance(userSplitted[0], userSplitted[1], path);
+			return constr.newInstance(username, password, path);
 		} catch (Exception err) {
 			throw new DatabaseException("Error when instanciating SQL database");
 		}
@@ -51,9 +59,9 @@ public class DatabaseFactory {
 		try {
 			URI url = new URI(dsn);
 			String scheme = url.getScheme();
-			if (scheme == "json")
+			if (scheme.equals("json"))
 				return createJSONDatabase(url, UserJSONDatabase.class);
-			if (scheme == "hsql")
+			if (scheme.equals("hsql"))
 				return createSQLDatabase(url, UserSQLDatabase.class);
 			throw new UnsupportedDatabaseProtocol(scheme);
 		} catch (URISyntaxException e) {
@@ -65,9 +73,9 @@ public class DatabaseFactory {
 		try {
 			URI url = new URI(dsn);
 			String scheme = url.getScheme();
-			if (scheme == "json")
+			if (scheme.equals("json"))
 				return createJSONDatabase(url, RawJSONDatabase.class);
-			if (scheme == "hsql")
+			if (scheme.equals("hsql"))
 				return createSQLDatabase(url, RawSQLDatabase.class);
 			throw new UnsupportedDatabaseProtocol(scheme);
 		} catch (URISyntaxException e) {
@@ -79,9 +87,9 @@ public class DatabaseFactory {
 		try {
 			URI url = new URI(dsn);
 			String scheme = url.getScheme();
-			if (scheme == "json")
+			if (scheme.equals("json"))
 				return createJSONDatabase(url, RegularJSONDatabase.class);
-			if (scheme == "hsql")
+			if (scheme.equals("hsql"))
 				return createSQLDatabase(url, RegularSQLDatabase.class);
 			throw new UnsupportedDatabaseProtocol(scheme);
 		} catch (URISyntaxException e) {
