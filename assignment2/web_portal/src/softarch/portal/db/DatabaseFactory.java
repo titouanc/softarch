@@ -1,11 +1,17 @@
 package softarch.portal.db;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import softarch.portal.db.json.JSONDatabase;
+import softarch.portal.db.json.RawJSONDatabase;
+import softarch.portal.db.json.RegularJSONDatabase;
+import softarch.portal.db.json.UserJSONDatabase;
+import softarch.portal.db.sql.RawSQLDatabase;
+import softarch.portal.db.sql.RegularSQLDatabase;
 import softarch.portal.db.sql.SQLDatabase;
+import softarch.portal.db.sql.UserSQLDatabase;
 
 public class DatabaseFactory {
 	private JSONDatabase createJSONDatabase(URI url, Class<? extends JSONDatabase> cls) throws DatabaseException {
@@ -34,7 +40,6 @@ public class DatabaseFactory {
 		String userSplitted[] = userInfo.split(":");
 		
 		try {
-			String args[] = extractSQLParams(url);
 			Constructor<? extends SQLDatabase> constr = cls.getConstructor(String.class, String.class, String.class);
 			return constr.newInstance(userSplitted[0], userSplitted[1], path);
 		} catch (Exception err) {
@@ -42,33 +47,45 @@ public class DatabaseFactory {
 		}
 	}
 	
-	public Database createUserDatabase(String dsn){
-		URI url = new URI(dsn);
-		String scheme = url.getScheme();
-		if (scheme == "json")
-			return createJSONDatabase(url, UserJSONDatabase.class);
-		if (scheme == "hsql")
-			return createSQLDatabase(url, UserSQLDatabase.class);
-		throw new UnsupportedDatabaseProtocol(scheme);
+	public Database createUserDatabase(String dsn) throws DatabaseException {
+		try {
+			URI url = new URI(dsn);
+			String scheme = url.getScheme();
+			if (scheme == "json")
+				return createJSONDatabase(url, UserJSONDatabase.class);
+			if (scheme == "hsql")
+				return createSQLDatabase(url, UserSQLDatabase.class);
+			throw new UnsupportedDatabaseProtocol(scheme);
+		} catch (URISyntaxException e) {
+			throw new DatabaseException("Invalid DSN");
+		}
 	}
 	
-	public Database createRawDatabase(String dsn){
-		URI url = new URI(dsn);
-		String scheme = url.getScheme();
-		if (scheme == "json")
-			return createJSONDatabase(url, RawJSONDatabase.class);
-		if (scheme == "hsql")
-			return createSQLDatabase(url, RawSQLDatabase.class);
-		throw new UnsupportedDatabaseProtocol(scheme);
+	public Database createRawDatabase(String dsn) throws DatabaseException {
+		try {
+			URI url = new URI(dsn);
+			String scheme = url.getScheme();
+			if (scheme == "json")
+				return createJSONDatabase(url, RawJSONDatabase.class);
+			if (scheme == "hsql")
+				return createSQLDatabase(url, RawSQLDatabase.class);
+			throw new UnsupportedDatabaseProtocol(scheme);
+		} catch (URISyntaxException e) {
+			throw new DatabaseException("Invalid DSN");
+		}
 	}
 	
-	public Database createRegularDatabase(String dsn){
-		URI url = new URI(dsn);
-		String scheme = url.getScheme();
-		if (scheme == "json")
-			return createJSONDatabase(url, RegularJSONDatabase.class);
-		if (scheme == "hsql")
-			return createSQLDatabase(url, RegularSQLDatabase.class);
-		throw new UnsupportedDatabaseProtocol(scheme);
+	public Database createRegularDatabase(String dsn) throws DatabaseException {
+		try {
+			URI url = new URI(dsn);
+			String scheme = url.getScheme();
+			if (scheme == "json")
+				return createJSONDatabase(url, RegularJSONDatabase.class);
+			if (scheme == "hsql")
+				return createSQLDatabase(url, RegularSQLDatabase.class);
+			throw new UnsupportedDatabaseProtocol(scheme);
+		} catch (URISyntaxException e) {
+			throw new DatabaseException("Invalid DSN");
+		}
 	}
 }

@@ -25,11 +25,11 @@ import java.sql.SQLException;
  * This class encapsulates the regular database.
  * @author Niels Joncheere
  */
-public class RegularDatabase extends SQLDatabase {
+public class RegularSQLDatabase extends SQLDatabase {
 	/**
 	 * Creates a new regular database.
 	 */
-	public RegularDatabase(String dbUser, String dbPassword, String dbUrl) {
+	public RegularSQLDatabase(String dbUser, String dbPassword, String dbUrl) {
 		super(dbUser, dbPassword, dbUrl);
 	}
 
