@@ -17,6 +17,7 @@ import softarch.portal.data.InterestingWebsite;
 import softarch.portal.data.RegularData;
 import softarch.portal.data.Report;
 import softarch.portal.data.SoftwareRepository;
+import softarch.portal.db.RegularDatabase;
 
 import java.text.ParseException;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ import java.sql.SQLException;
  * This class encapsulates the regular database.
  * @author Niels Joncheere
  */
-public class RegularSQLDatabase extends SQLDatabase {
+public class RegularSQLDatabase extends SQLDatabase implements RegularDatabase {
 	/**
 	 * Creates a new regular database.
 	 */
