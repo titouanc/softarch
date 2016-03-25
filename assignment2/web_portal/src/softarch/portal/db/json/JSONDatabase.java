@@ -13,13 +13,14 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 
+import softarch.portal.data.Data;
 import softarch.portal.db.Database;
 
-public abstract class JSONDatabase implements Database {
+public class JSONDatabase implements Database {
 	private String directory;
 	private Gson gson;
 	
-	public class Table<T> {
+	public class Table<T extends Data> {
 		public Table(int lastID, List<T> rows) {
 			this.lastID = lastID;
 			this.rows = rows;
@@ -33,13 +34,13 @@ public abstract class JSONDatabase implements Database {
 		this.gson = new Gson();
 	}
 	
-	private <T> String getFileName(Class<T> klass) {
+	public <T extends Data> String getFileName(Class<T> klass) {
 		return this.directory + File.separator + klass.getName().toLowerCase() + "s.json";
 	}
 	
-	protected <T> Table<T> readTable(Class<T> klass) {
+	public <T extends Data> Table<T> readTable(Class<T> klass) {
 		String fileName = this.getFileName(klass);
-		System.out.println("getTable<" + klass.getName() + ">: JSON filename : " + fileName);
+		System.out.println("readTable<" + klass.getName() + ">: JSON filename : " + fileName);
 		Table<T> table;
 		try {
 			table = this.gson.fromJson(new JsonReader(new FileReader(fileName)), Table.class);
@@ -53,18 +54,22 @@ public abstract class JSONDatabase implements Database {
 			table = null;
 		} catch (FileNotFoundException e) {
 			table = new Table<T>(0, new ArrayList<T>());
-			this.writeTable(table);
+			this.writeTable(table, klass);
 		}
 		return table;
 	}
 	
-	protected <T> void writeTable(Table<T> table) {
-		String fileName = this.getFileName(table.getClass());
+	public <T extends Data> void writeTable(Table<T> table, Class<T> type) {
+		String fileName = this.getFileName(type);
+		System.out.println("writeTable<" + table.getClass().getName() + ">: JSON filename : " + fileName);
+		FileWriter writer;
 		try {
-			new FileWriter(fileName).write(this.gson.toJson(table, Table.class));
-		} catch (IOException e) {
+			writer = new FileWriter(fileName);
+			writer.write(this.gson.toJson(table, Table.class));
+			writer.close();
+		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 	}
 }
