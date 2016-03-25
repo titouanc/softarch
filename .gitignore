@@ -1,6 +1,7 @@
 *.log
 *.aux
 *.pdf
+*.out
 *.class
 *.metadata/
 assignment2/RemoteSystemsTempFiles/
