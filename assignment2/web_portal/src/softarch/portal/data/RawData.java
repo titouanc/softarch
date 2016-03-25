@@ -9,7 +9,6 @@ import java.util.Vector;
  * @author Niels Joncheere
  */
 public class RawData extends Data {
-	private int		id;
 	private String		source;
 	private RegularData	structure;
 
@@ -25,10 +24,6 @@ public class RawData extends Data {
 		this.id		= id;
 		this.source	= new String();
 		this.structure	= structure;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public String getSource() {

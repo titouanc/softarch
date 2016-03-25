@@ -17,6 +17,8 @@ import com.google.gson.stream.JsonReader;
 
 import softarch.portal.data.*;
 import softarch.portal.db.Database;
+import softarch.portal.db.json.JSONDatabase.Table;
+import softarch.portal.db.sql.DatabaseException;
 
 public class JSONDatabase implements Database {
 	private String directory;
@@ -38,6 +40,17 @@ public class JSONDatabase implements Database {
 			file.mkdirs();
 		}
 		this.gson = new Gson();
+	}
+	
+	protected int findId(Table<? extends Data> table, int id) throws DatabaseException{
+		int i = 0;
+		for (Data elmt : table.rows){
+			if (elmt.getId() == id){
+				return i;
+			}
+			i++;
+		}
+		throw new DatabaseException("ID not found");
 	}
 	
 	public <T> String getFileName(Class<T> klass) {

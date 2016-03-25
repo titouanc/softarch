@@ -12,16 +12,6 @@ public class RawJSONDatabase extends JSONDatabase implements RawDatabase {
 		super(directory);
 	}
 	
-	private int findId(Table<RawData> table, int id) throws DatabaseException{
-		int i = 0;
-		for (RawData elmt : table.rows){
-			if (elmt.getId() == id){
-				return i;
-			}
-			i++;
-		}
-		throw new DatabaseException("ID not found");
-	}
 
 	public List getRawData() throws DatabaseException {
 		return readTable(RawData.class).rows;

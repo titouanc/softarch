@@ -12,6 +12,17 @@ public abstract class Data {
 	/**
 	 * The portal's date format.
 	 */
+	
+	protected int id;
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
 	protected static final DateFormat df
 		= new SimpleDateFormat("yyyy-MM-dd");
 
