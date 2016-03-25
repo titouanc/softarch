@@ -22,8 +22,9 @@ public class DatabaseFacade {
 
 	/**
 	 * Creates a new database facade.
+	 * @throws softarch.portal.db.DatabaseException 
 	 */
-	public DatabaseFacade(String dsn) {
+	public DatabaseFacade(String dsn) throws softarch.portal.db.DatabaseException {
 		DatabaseFactory factory = new DatabaseFactory();
 		userDb		= (UserDatabase) factory.createUserDatabase(dsn);
 		regularDb	= (RegularDatabase) factory.createRegularDatabase(dsn);

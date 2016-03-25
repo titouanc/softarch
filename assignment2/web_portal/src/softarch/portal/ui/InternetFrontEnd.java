@@ -21,6 +21,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.Transformer;
 import softarch.portal.app.ApplicationFacade;
+import softarch.portal.db.DatabaseException;
 
 /**
  * This class implements the portal's internet front-end. It is a
@@ -118,26 +119,25 @@ public class InternetFrontEnd extends HttpServlet {
 			e1.printStackTrace();
 		}
 
-		String dbUser = getInitParameter("db_user");
-		String dbPassword = getInitParameter("db_pass");
-		String dbUrl = fullPath+getInitParameter("db_url");
+		String dbDsn = getInitParameter("db_dsn");
 		String stylesheet = fullPath+getInitParameter("stylesheet");
 
 		properties = new Properties();
-		properties.put("dbUser", dbUser);
-		properties.put("dbPassword", dbUser);
-		properties.put("dbUrl", dbUser);
+		properties.put("dbDsn", dbDsn);
 		properties.put("stylesheet", stylesheet);
 
-		ApplicationFacade appFacade = new ApplicationFacade(dbUser, dbPassword, dbUrl);
-
-		pages.put("Registration", new RegistrationPage(appFacade));
-		pages.put("Login", new LoginPage(appFacade));
-		pages.put("Query", new QueryPage(appFacade));
-		pages.put("Administration", new AdministrationPage(appFacade));
-		pages.put("Operation", new OperationPage(appFacade));
-		pages.put("Logout", new LogoutPage(appFacade));
-
+		ApplicationFacade appFacade;
+		try {
+			appFacade = new ApplicationFacade(dbDsn);
+			pages.put("Registration", new RegistrationPage(appFacade));
+			pages.put("Login", new LoginPage(appFacade));
+			pages.put("Query", new QueryPage(appFacade));
+			pages.put("Administration", new AdministrationPage(appFacade));
+			pages.put("Operation", new OperationPage(appFacade));
+			pages.put("Logout", new LogoutPage(appFacade));
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

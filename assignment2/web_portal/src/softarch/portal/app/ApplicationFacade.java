@@ -3,6 +3,7 @@ package softarch.portal.app;
 import softarch.portal.data.RawData;
 import softarch.portal.data.RegularData;
 import softarch.portal.data.UserProfile;
+import softarch.portal.db.DatabaseException;
 import softarch.portal.db.DatabaseFacade;
 
 import java.util.List;
@@ -23,10 +24,11 @@ public class ApplicationFacade {
 
 	/**
 	 * Creates a new application facade.
+	 * @throws DatabaseException 
 	 */
-	public ApplicationFacade(String dbUser, String dbPassword, String dbUrl) {
+	public ApplicationFacade(String dbDsn) throws DatabaseException {
 
-		DatabaseFacade dbFacade = new DatabaseFacade(dbUser, dbPassword, dbUrl);
+		DatabaseFacade dbFacade = new DatabaseFacade(dbDsn);
 
 		userManager = new UserManager(dbFacade);
 		queryManager = new QueryManager(dbFacade);
