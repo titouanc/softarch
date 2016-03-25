@@ -16,7 +16,7 @@ Antoine-Carpentier_Titouan-Christophe_2.pdf: main.pdf
 	lunamark -t latex $< | sed -E 's/\\includegraphics(\{.+\})/\\begin{figure}[H]\\includegraphics[width=\\textwidth]\1\\end{figure}/' > $@
 
 clean:
-	rm -f *.aux *.log report.tex
+	rm -f *.aux *.log *.out
 
 mrproper: clean
 	rm -f *.pdf

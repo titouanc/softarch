@@ -1,6 +1,6 @@
 
 # Libraries
-In order to parse JSON files more easily we use the google-gson library ([github repository](https://github.com/google/gson)). It allows us to convert Java objects directly to JSON and vice-versa.
+In order to parse JSON files more easily we use the google-gson library ([https://github.com/google/gson](https://github.com/google/gson)). It allows us to convert Java objects directly to JSON and vice-versa.
 
 # Implementation of the JSON database layer
 
