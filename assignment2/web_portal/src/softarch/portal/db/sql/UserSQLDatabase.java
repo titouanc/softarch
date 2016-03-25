@@ -8,6 +8,7 @@ import softarch.portal.data.FreeSubscription;
 import softarch.portal.data.Operator;
 import softarch.portal.data.RegularAdministrator;
 import softarch.portal.data.UserProfile;
+import softarch.portal.db.UserDatabase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +21,7 @@ import java.text.ParseException;
  * This class encapsulates the user database.
  * @author Niels Joncheere
  */
-public class UserSQLDatabase extends SQLDatabase {
+public class UserSQLDatabase extends SQLDatabase implements UserDatabase {
 	/**
 	 * Creates a new user database.
 	 */
