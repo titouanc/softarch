@@ -1,10 +1,8 @@
 
 # Libraries
-use of google-gson
+In order to parse JSON files more easily we use the google-gson library ([https://github.com/google/gson](https://github.com/google/gson)). It allows us to convert Java objects directly to JSON and vice-versa.
 
-
-# Problems and solutions
-## Data layer
+# Implementation of the JSON database layer
 
 Main problem : data classes are intrisically depend on SQL
 softarch.portal.data.* constructs SQL queries (ex: Book)
@@ -18,6 +16,10 @@ softarch.portal.data.* constructs SQL queries (ex: Book)
     -> to define a new method of storage : create an abstract class that define the way to store data, create three concrete class that inherit it and implements Raw/Regular/User and modify add method to the database factory to parse the new dsn.
 
 We had to change to modify the facades constructor to take the dsn into account during the database construction. That is the only modification of other layers we did.
+
+# Other design flaws
+
+## Data layer
 
 softarch.portal.data.* constructs XML (ex: Book)
     -> the UI layer should do it
