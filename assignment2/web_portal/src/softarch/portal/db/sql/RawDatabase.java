@@ -22,7 +22,7 @@ import java.sql.SQLException;
  * This class encapsulates the portal's raw database.
  * @author Niels Joncheere
  */
-public class RawDatabase extends Database {
+public class RawDatabase extends SQLDatabase {
 	/**
 	 * Creates a new raw database.
 	 */

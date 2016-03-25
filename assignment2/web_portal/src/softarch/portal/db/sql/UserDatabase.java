@@ -20,7 +20,7 @@ import java.text.ParseException;
  * This class encapsulates the user database.
  * @author Niels Joncheere
  */
-public class UserDatabase extends Database {
+public class UserDatabase extends SQLDatabase {
 	/**
 	 * Creates a new user database.
 	 */
