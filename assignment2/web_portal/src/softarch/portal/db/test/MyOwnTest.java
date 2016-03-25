@@ -10,9 +10,8 @@ public class MyOwnTest {
 	public static void main(String[] args) {
 		JSONDatabase db = new JSONDatabase(".");
 		FreeSubscription user = new FreeSubscription("toon", "toon", "toon", "toon", "toon", new Date());
-		System.out.println(user);
-		System.out.println(db.getFileName(FreeSubscription.class));
 		Table<FreeSubscription> table = (Table<FreeSubscription>) db.readTable(user.getClass());
 		table.rows.add(user);
+		db.writeTable(table, FreeSubscription.class);
 	}
 }
