@@ -12,12 +12,10 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-import softarch.portal.data.Administrator;
-import softarch.portal.data.Data;
+import softarch.portal.data.*;
 import softarch.portal.data.FreeSubscription;
 import softarch.portal.db.Database;
 
@@ -44,11 +42,44 @@ public class JSONDatabase implements Database {
 	}
 	
 	private <T> Type getType(Class<T> klass) {
-		if (klass == Administrator.class) {
-			return new TypeToken<Table<Administrator>>() {}.getType();
+		if (klass == Article.class) {
+			return new TypeToken<Table<Article>>() {}.getType();
+		}
+		else if (klass == Book.class) {
+			return new TypeToken<Table<Book>>() {}.getType();
+		}
+		else if (klass == CheapSubscription.class) {
+			return new TypeToken<Table<CheapSubscription>>() {}.getType();
+		}
+		else if (klass == Conference.class) {
+			return new TypeToken<Table<Conference>>() {}.getType();
+		}
+		else if (klass == ExpensiveSubscription.class) {
+			return new TypeToken<Table<ExpensiveSubscription>>() {}.getType();
+		}
+		else if (klass == ExpertAdministrator.class) {
+			return new TypeToken<Table<ExpertAdministrator>>() {}.getType();
+		}
+		else if (klass == ExternalAdministrator.class) {
+			return new TypeToken<Table<ExternalAdministrator>>() {}.getType();
 		}
 		else if (klass == FreeSubscription.class) {
 			return new TypeToken<Table<FreeSubscription>>() {}.getType();
+		}
+		else if (klass == InterestingWebsite.class) {
+			return new TypeToken<Table<InterestingWebsite>>() {}.getType();
+		}
+		else if (klass == Operator.class) {
+			return new TypeToken<Table<Operator>>() {}.getType();
+		}
+		else if (klass == RegularAdministrator.class) {
+			return new TypeToken<Table<RegularAdministrator>>() {}.getType();
+		}
+		else if (klass == Report.class) {
+			return new TypeToken<Table<Report>>() {}.getType();
+		}
+		else if (klass == SoftwareRepository.class) {
+			return new TypeToken<Table<SoftwareRepository>>() {}.getType();
 		}
 		return null;
 	}
