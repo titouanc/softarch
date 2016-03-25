@@ -16,7 +16,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import softarch.portal.data.*;
-import softarch.portal.data.FreeSubscription;
 import softarch.portal.db.Database;
 
 public class JSONDatabase implements Database {
@@ -34,6 +33,10 @@ public class JSONDatabase implements Database {
 	
 	public JSONDatabase(String directory) {
 		this.directory = directory;
+		File file = new File(this.directory);
+		if (!file.exists()){
+			file.mkdirs();
+		}
 		this.gson = new Gson();
 	}
 	

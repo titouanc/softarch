@@ -18,7 +18,7 @@
 		</init-param>
 		<init-param>
 		    <param-name>db_dsn</param-name>
-		    <param-value>json:///tmp/myAwesomeDB.json</param-value>
+		    <param-value>json:///tmp/portal/</param-value>
 		</init-param>
 		<init-param>
 			<param-name>stylesheet</param-name>
