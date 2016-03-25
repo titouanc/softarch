@@ -17,6 +17,8 @@ softarch.portal.data.* constructs SQL queries (ex: Book)
     -> choose the method of storage using dsn in servlet configuration and a database factory
     -> to define a new method of storage : create an abstract class that define the way to store data, create three concrete class that inherit it and implements Raw/Regular/User and modify add method to the database factory to parse the new dsn.
 
+We had to change to modify the facades constructor to take the dsn into account during the database construction. That is the only modification of other layers we did.
+
 softarch.portal.data.* constructs XML (ex: Book)
     -> the UI layer should do it
 
