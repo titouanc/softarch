@@ -12,21 +12,21 @@ import java.util.Date;
  * @author Niels Joncheere
  */
 public class DatabaseFacade {
-	private UserDatabase	userDb;
-	private RegularDatabase	regularDb;
-	private RawDatabase	rawDb;
+	private UserSQLDatabase	userDb;
+	private RegularSQLDatabase	regularDb;
+	private RawSQLDatabase	rawDb;
 
 	/**
 	 * Creates a new database facade.
 	 */
 	public DatabaseFacade(String dbUser, String dbPassword, String dbUrl) {
-		userDb		= new UserDatabase(	dbUser,
+		userDb		= new UserSQLDatabase(	dbUser,
 							dbPassword,
 							dbUrl);
-		regularDb	= new RegularDatabase(	dbUser,
+		regularDb	= new RegularSQLDatabase(	dbUser,
 							dbPassword,
 							dbUrl);
-		rawDb		= new RawDatabase(	dbUser,
+		rawDb		= new RawSQLDatabase(	dbUser,
 							dbPassword,
 							dbUrl);
 	}
