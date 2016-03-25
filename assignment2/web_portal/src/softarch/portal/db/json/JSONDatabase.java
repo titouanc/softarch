@@ -91,6 +91,9 @@ public class JSONDatabase implements Database {
 		else if (klass == RegularAdministrator.class) {
 			return new TypeToken<Table<RegularAdministrator>>() {}.getType();
 		}
+		else if (klass == RegularUser.class) {
+			return new TypeToken<Table<RegularUser>>() {}.getType();
+		}
 		else if (klass == Report.class) {
 			return new TypeToken<Table<Report>>() {}.getType();
 		}

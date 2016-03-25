@@ -74,6 +74,7 @@ public class UserManager extends Manager {
 			throw new ApplicationException(e.getMessage());
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			throw new ApplicationException(
 				"The user manager has caught an unexpected " +
 				"exception: " + e.getMessage());
