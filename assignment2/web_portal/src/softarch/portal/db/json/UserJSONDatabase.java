@@ -24,6 +24,21 @@ public class UserJSONDatabase extends JSONDatabase implements UserDatabase {
 		RegularUser.class
 	};
 
+	private void updateNextId(){
+		int maxId = 0;
+		for (Class cls : userTypes){
+			Table<? extends UserProfile> table = readTable(cls);
+			if (table.lastID > maxId)
+				maxId = table.lastID;
+		}
+		for (Class cls : userTypes){
+			Table<? extends UserProfile> table = readTable(cls);
+			table.lastID = maxId;
+			writeTable(table, cls);
+		}
+	}
+	
+	
 	public UserJSONDatabase(String directory) {
 		super(directory);
 	}
@@ -33,6 +48,7 @@ public class UserJSONDatabase extends JSONDatabase implements UserDatabase {
 		profile.setId(table.lastID++);
 		table.rows.add(profile);
 		writeTable(table, profile.getClass());
+		updateNextId();
 	}
 
 	public void update(UserProfile profile) throws DatabaseException {

@@ -9,6 +9,18 @@ import java.util.Date;
  */
 public abstract class RegularData extends Data {
 	protected Date dateAdded;
+	
+	/**
+	 * Return true if one of the interesting field of a regular data
+	 * match a given query text
+	 * @param query The text to find into attributes
+	 * @return true if match, false otherwise
+	 */
+	public abstract boolean matchQuery(String query);
+	
+	public boolean isOlderThan(Date date){
+		return dateAdded.after(date);
+	}
 
 	/**
 	 * Returns an SQL INSERT string that allows the system to add the

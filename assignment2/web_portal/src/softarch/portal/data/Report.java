@@ -16,6 +16,17 @@ public class Report extends RegularData {
 	private String	review;
 	private String	summary;
 	private String	title;
+	
+	@Override
+	public boolean matchQuery(String query) {
+		String q = query.toLowerCase();
+		String attrs[] = {author, review, summary, title};
+		for (String s : attrs){
+			if (s.toLowerCase().contains(q))
+				return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Creates a new report.
