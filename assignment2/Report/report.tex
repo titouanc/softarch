@@ -43,10 +43,10 @@ Using DSN strings, we can encode different options type \textit{(path for json, 
 Several data types have a method to create an XML representation of themselves to be used in the UI layer. The right way to do it would be to construct the XML in the UI layer. This let the UI layer alone handle the data format to send to the client and it is thus easier to change the said data format. This could be accomplished easily using the accessors of the data types.
 
 \subsubsection{Servlet Request}
-Several data types have a constructor from a `HttpServletRequest`. This binds the data to the way information is transmitted between the client and the server. The right way to do it would be for the UI layer to extract the data from the request before use in the data types.
+Several data types have a constructor from a \texttt{HttpServletRequest}. This binds the data to the way information is transmitted between the client and the server. The right way to do it would be for the UI layer to extract the data from the request before use in the data types.
 
 \subsubsection{ResultSet}
-Several data types have a constructor from a `ResultSet`. The data is then coupled with the way it is stored in the database. The right way to solve that problem is for the database layer to extract the data from the result set before use in the data types.
+Several data types have a constructor from a \texttt{ResultSet}. The data is then coupled with the way it is stored in the database. The right way to solve that problem is for the database layer to extract the data from the result set before use in the data types.
 
 \subsubsection{URI}
 Several data types have method(s) that return the HTTP URI of their location on the server. The UI layer should manage URIs and bind them to the correct resources.
@@ -65,11 +65,11 @@ There is no design flaw in the application layer. It manages only the session an
 
 \subsection{UI layer}
 
-Several pages (`AdministrationPage` for example) handle queries whereas they should only extract data from the HTTP request and send it to the application layer.
+Several pages (\texttt{AdministrationPage} for example) handle queries whereas they should only extract data from the HTTP request and send it to the application layer.
 
-`RegistrationPage` handles the creation of different types of user whereas it should only extract the useful data and pass it to the application layer (which should then let the database layer handle it).
+\texttt{RegistrationPage} handles the creation of different types of user whereas it should only extract the useful data and pass it to the application layer (which should then let the data layer handle it).
 
-`InternetFrontPage` handles a DatabaseException whereas the UI layer should not know anything about the data layer and let the application layer handle it.
+\texttt{InternetFrontPage} handles a \texttt{DatabaseException} whereas the UI layer should not know anything about the data layer and let the application layer handle it.
 
 
 % AdministrationPage handles query but the Application Layer should do it 
