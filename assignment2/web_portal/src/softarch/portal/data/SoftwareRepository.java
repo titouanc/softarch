@@ -16,6 +16,17 @@ public class SoftwareRepository extends RegularData {
 	private String	author;
 	private String	name;
 	private URL	url;
+	
+	@Override
+	public boolean matchQuery(String query) {
+		String q = query.toLowerCase();
+		String attrs[] = {author, name};
+		for (String s : attrs){
+			if (s.toLowerCase().contains(q))
+				return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Creates a new software repository.

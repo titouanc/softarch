@@ -100,6 +100,9 @@ public class JSONDatabase implements Database {
 		else if (klass == SoftwareRepository.class) {
 			return new TypeToken<Table<SoftwareRepository>>() {}.getType();
 		}
+		else if (klass == RawData.class) {
+			return new TypeToken<Table<RawData>>() {}.getType();
+		}
 		return null;
 	}
 	
