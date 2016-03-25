@@ -53,13 +53,18 @@ public abstract class JSONDatabase implements Database {
 			table = null;
 		} catch (FileNotFoundException e) {
 			table = new Table<T>(0, new ArrayList<T>());
-			try {
-				new FileWriter(fileName).write(this.gson.toJson(table, Table.class));
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			this.writeTable(table);
 		}
 		return table;
+	}
+	
+	protected <T> void writeTable(Table<T> table) {
+		String fileName = this.getFileName(table.getClass());
+		try {
+			new FileWriter(fileName).write(this.gson.toJson(table, Table.class));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
