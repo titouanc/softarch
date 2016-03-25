@@ -8,15 +8,20 @@ import softarch.portal.db.json.JSONDatabase;
 import softarch.portal.db.sql.SQLDatabase;
 
 public class DatabaseFactory {
-	private String extractJSONParam(URI url) throws DatabaseException {
+	private JSONDatabase createJSONDatabase(URI url, Class<? extends JSONDatabase> cls) throws DatabaseException {
 		String path = url.getPath();
 		if (path == null){
 			throw new DatabaseException("Missing path to JSON database");
 		}
-		return path;
+		try {
+			Constructor<? extends JSONDatabase> constr = cls.getConstructor(String.class);
+			return constr.newInstance(path);
+		} catch (Exception err) {
+			throw new DatabaseException("Error when instanciating JSON database");
+		}
 	}
-	
-	private String[] extractSQLParams(URI url) throws DatabaseException {
+		
+	private SQLDatabase createSQLDatabase(URI url, Class<? extends SQLDatabase> cls) throws DatabaseException {
 		String path = url.getPath();
 		if (path == null){
 			throw new DatabaseException("Missing path to database");
@@ -28,25 +33,10 @@ public class DatabaseFactory {
 		}
 		String userSplitted[] = userInfo.split(":");
 		
-		String res[] = new String[3];
-		res[0] = userSplitted[0];
-		res[1] = userSplitted[1];
-		res[2] = path;
-		return res;
-	}
-	
-	private JSONDatabase createJSONDatabase(URI url, Constructor<? extends JSONDatabase> constr) throws DatabaseException {
-		try {
-			return constr.newInstance(extractJSONParam(url));
-		} catch (Exception err) {
-			throw new DatabaseException("Error when instanciating JSON database");
-		}
-	}
-		
-	private SQLDatabase createSQLDatabase(URI url, Constructor<? extends SQLDatabase> constr) throws DatabaseException {
 		try {
 			String args[] = extractSQLParams(url);
-			return constr.newInstance(args[0], args[1], args[2]);
+			Constructor<? extends SQLDatabase> constr = cls.getConstructor(String.class, String.class, String.class);
+			return constr.newInstance(userSplitted[0], userSplitted[1], path);
 		} catch (Exception err) {
 			throw new DatabaseException("Error when instanciating SQL database");
 		}
@@ -56,9 +46,9 @@ public class DatabaseFactory {
 		URI url = new URI(dsn);
 		String scheme = url.getScheme();
 		if (scheme == "json")
-			return createJSONDatabase(url, UserJSONDatabase.class.getConstructor(String.class));
+			return createJSONDatabase(url, UserJSONDatabase.class);
 		if (scheme == "hsql")
-			return createSQLDatabase(url, UserSQLDatabase.class.getConstructor(String.class, String.class, String.class));
+			return createSQLDatabase(url, UserSQLDatabase.class);
 		throw new UnsupportedDatabaseProtocol(scheme);
 	}
 	
@@ -66,9 +56,9 @@ public class DatabaseFactory {
 		URI url = new URI(dsn);
 		String scheme = url.getScheme();
 		if (scheme == "json")
-			return createJSONDatabase(url, RawJSONDatabase.class.getConstructor(String.class));
+			return createJSONDatabase(url, RawJSONDatabase.class);
 		if (scheme == "hsql")
-			return createSQLDatabase(url, RawSQLDatabase.class.getConstructor(String.class, String.class, String.class));
+			return createSQLDatabase(url, RawSQLDatabase.class);
 		throw new UnsupportedDatabaseProtocol(scheme);
 	}
 	
@@ -76,9 +66,9 @@ public class DatabaseFactory {
 		URI url = new URI(dsn);
 		String scheme = url.getScheme();
 		if (scheme == "json")
-			return createJSONDatabase(url, RegularJSONDatabase.class.getConstructor(String.class));
+			return createJSONDatabase(url, RegularJSONDatabase.class);
 		if (scheme == "hsql")
-			return createSQLDatabase(url, RegularSQLDatabase.class.getConstructor(String.class, String.class, String.class));
+			return createSQLDatabase(url, RegularSQLDatabase.class);
 		throw new UnsupportedDatabaseProtocol(scheme);
 	}
 }
