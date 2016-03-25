@@ -13,5 +13,6 @@ public class MyOwnTest {
 		Table<FreeSubscription> table = (Table<FreeSubscription>) db.readTable(user.getClass());
 		table.rows.add(user);
 		db.writeTable(table, FreeSubscription.class);
+		System.out.println(table.rows.get(0).getClass());
 	}
 }

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +13,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+import softarch.portal.data.Administrator;
 import softarch.portal.data.Data;
+import softarch.portal.data.FreeSubscription;
 import softarch.portal.db.Database;
 
 public class JSONDatabase implements Database {
@@ -39,12 +43,22 @@ public class JSONDatabase implements Database {
 		return this.directory + File.separator + klass.getName().toLowerCase() + "s.json";
 	}
 	
+	private <T> Type getType(Class<T> klass) {
+		if (klass == Administrator.class) {
+			return new TypeToken<Table<Administrator>>() {}.getType();
+		}
+		else if (klass == FreeSubscription.class) {
+			return new TypeToken<Table<FreeSubscription>>() {}.getType();
+		}
+		return null;
+	}
+	
 	public <T> Table<T> readTable(Class<T> klass) {
 		String fileName = this.getFileName(klass);
 		System.out.println("readTable<" + klass.getName() + ">: JSON filename : " + fileName);
 		Table<T> table;
 		try {
-			table = this.gson.fromJson(new JsonReader(new FileReader(fileName)), Table.class);
+			table = this.gson.fromJson(new JsonReader(new FileReader(fileName)), this.getType(klass));
 		} catch (JsonIOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
