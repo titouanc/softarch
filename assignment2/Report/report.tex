@@ -1,24 +1,22 @@
 \section{Libraries}
 
-In order to parse JSON files more easily we use the google-gson library (\href{https://github.com/google/gson}{https://github.com/google/gson}). It allows us to convert Java objects directly to JSON and vice-versa.
+In order to parse JSON files more easily we use the google-gson library (\url{https://github.com/google/gson}). It allows us to convert Java objects directly to JSON and vice-versa.
 
 \section{Implementation of the JSON database layer}
 
-Main problem : data classes are intrisically depend on SQL softarch.portal.data.* constructs SQL queries (ex: Book) -\char62{} our implementation in json uses reflection to store data -\char62{} the sql implementation should do the same -\char62{} abstract the notion of a database in an interface Database -\char62{} abstract the operations on Raw/Regular/User databases in interfaces -\char62{} define the way to store data in JSON/SQL abstract classes -\char62{} define Raw/Regular/User JSON/SQL databases that inherits and implements those above -\char62{} choose the method of storage using dsn in servlet configuration and a database factory -\char62{} to define a new method of storage : create an abstract class that define the way to store data, create three concrete class that inherit it and implements Raw/Regular/User and modify add method to the database factory to parse the new dsn.
+The main problem with the original implementation (Figure \ref{fig:before}) is a tight coupling between the data types, the database layer and the UI layer. For example data types can be constructed from sql cursors or HTTP requests. We didn't attempt to change the whole architecture, but we added the \texttt{matchQuery(String)} and \texttt{isOlderThan(Date)} methods to the concrete regular data types. These methods allow us to perform filtering on objects loaded from json files (as we don't have an SQL-like query language).
 
-We had to change to modify the facades constructor to take the dsn into account during the database construction. That is the only modification of other layers we did.
-
-\begin{figure}[!h]
+\begin{figure}[p]
   \includegraphics[width=\textwidth]{before.eps}
-  \caption{The original database layer}
+  \caption{\label{fig:before}The original database layer}
 \end{figure}
 
 \subsection{Extracting interfaces}
-The first architectural change in the database layer was to move the original databases classes in a new package \texttt{softarch.portal.db.sql}. Then we created interfaces with the same methods as in the original classes in the \texttt{softarch.portal.db} package. Of course, the SQL implementations now implements these interfaces. Then we created their json equivalents in the \texttt{softarch.portal.db.json} package.
+The first architectural change in the database layer was to move the original databases classes in a new package \texttt{softarch.portal.db.sql}. Then we created interfaces with the same methods as in the original classes in the \texttt{softarch.portal.db} package. Of course, the SQL implementations now implements these interfaces. Then we created their json equivalents in the \texttt{softarch.portal.db.json} package, as represented in Figure \ref{fig:after}.
 
-\begin{figure}[!h]
+\begin{figure}[p]
   \includegraphics[width=\textwidth]{after.eps}
-  \caption{The new database layer}
+  \caption{\label{fig:after}The new database layer}
 \end{figure}
 
 \subsection{Database Factory}
@@ -32,7 +30,7 @@ loooks like an URL, and for now supports the following schemes:
   \item \texttt{json:///path/to/json/directory}
 \end{itemize}
 
-Using DSN strings, we can encode different options type \textit{(path for json, database credentials for hsl, ...)}, it is easily human-readable, and can be read and written to a file without effort. We replaced the \texttt{db\_url, db\_user, db\_pass} configurations parameters with \texttt{db\_dsn} in the deployment configuration file (\texttt{WebContent/WEB-INF/web.xml}). This configuration value could be changed when needed.
+Using DSN strings, we can encode different options type \textit{(path for json, database credentials for hsl, ...)}, it is easily human-readable, and can be read and written to a file without effort. We replaced the \texttt{db\_url, db\_user, db\_pass} configurations parameters with \texttt{db\_dsn} in the deployment configuration file (\texttt{WebContent/WEB-INF/web.xml}). This configuration value could be changed when needed. We had to propagate the modification to the database credentials to all the classes that need to be created in order to obtain a concrete database, but from now on no more change would be required, thanks to the database facade that encapsulate the creation and access to the databases.
 
 
 \section{Other design flaws}
