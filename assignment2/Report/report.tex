@@ -8,6 +8,33 @@ Main problem : data classes are intrisically depend on SQL softarch.portal.data.
 
 We had to change to modify the facades constructor to take the dsn into account during the database construction. That is the only modification of other layers we did.
 
+\begin{figure}[!h]
+  \includegraphics[width=\textwidth]{before.eps}
+  \caption{The original database layer}
+\end{figure}
+
+\subsection{Extracting interfaces}
+The first architectural change in the database layer was to move the original databases classes in a new package \texttt{softarch.portal.db.sql}. Then we created interfaces with the same methods as in the original classes in the \texttt{softarch.portal.db} package. Of course, the SQL implementations now implements these interfaces. Then we created their json equivalents in the \texttt{softarch.portal.db.json} package.
+
+\begin{figure}[!h]
+  \includegraphics[width=\textwidth]{after.eps}
+  \caption{The new database layer}
+\end{figure}
+
+\subsection{Database Factory}
+The next main change was to implement a factory to create databases using the
+right implementation. We therefore added a class \texttt{DatabaseFactory}, which
+has 3 methods to create the 3 type of specialized databases. The factory choose
+the actual implementation using a DSN\footnote{Data Source Name} String. This string
+loooks like an URL, and for now supports the following schemes:
+\begin{itemize}
+  \item \texttt{hsql://username:password@db/hsql\_uri}
+  \item \texttt{json:///path/to/json/directory}
+\end{itemize}
+
+Using DSN strings, we can encode different options type \textit{(path for json, database credentials for hsl, ...)}, it is easily human-readable, and can be read and written to a file without effort. We replaced the \texttt{db\_url, db\_user, db\_pass} configurations parameters with \texttt{db\_dsn} in the deployment configuration file (\texttt{WebContent/WEB-INF/web.xml}). This configuration value could be changed when needed.
+
+
 \section{Other design flaws}
 
 \subsection{Data layer}
