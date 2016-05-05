@@ -20,22 +20,33 @@ To obtain books in all language, it is sufficient to remove this tag, as the pre
 
 \subsubsection{Analyse the data that the two web services return. Are they the same? Why could this be a problem in a system? What is a possible solution ?}
 
-The data are not the same. The problem is that there can be parsing problems. And if a third web service is added it might return yet another data structure. The solution is to use XSLT in the BPEL process to return the same data structure whatever the service.
+The data from the two library webservices are nearly identical but differ in two ways:
+\begin{itemize}
+  \item The SOFT library return a \texttt{searchBooksResponse} containing a list of \texttt{book}, while the National Library returns a list of \texttt{searchForBooksReturn}, each of which contains exactly 1 \texttt{book}.
+  \item The SOFT library gives the publication year of the books, but the National Library give the full date of publication.
+\end{itemize}
+
+This is a problem because our application has to process distinctly the results of the two sources, even if the intermediate BPEL process aggregates them. We propose 2 solutions to this problem:
+
+\begin{itemize}
+  \item The SOFT and national libraries both aggree on a common web service port type, and therefore return their records in the same format. This is however not likely to happen because two different products have to be modified and the complexity of this process increases as more libraries would want to participate.
+  \item The XSL transformation occuring at the end of the BPEL process could be enhanced to normalize the data from the two source in a coherent book list.
+\end{itemize}
+
 
 \section{Exercise 2 : Integration with Legacy Software}
+\subsection{What did you change in the web portal application?}
+We choosed to add the webservice access in the database layer. We added a new package: \texttt{softarch.portal.db.webservice}, which only contains a \texttt{WebServiceRegularDatabase}, analogous to the \texttt{JSONRegularDatabase} from previous assignment. This class only implements two methods: \texttt{findRecords} and \texttt{getNumberOfRegularRecords}, and raise \texttt{DatabaseException} for all others operations. Finally, the \texttt{DatabaseFacade} class holds a private reference to a \texttt{WebServiceDatabase}, and add results from this service when its implemented methods are used on the database.
 
-    – What did you change in the web portal application?
-    The \texttt{DatabaseFacade} method \texttt{findRecords}. We added a \texttt{RegularDatabase} implementation for the web service (\texttt{WebserviceRegularDatabase}). The latter is an attribute of the \texttt{DatabaseFacade}
-    – How did your refactoring from the last assignment help or hinder you with
-    this task?
-    We already had an interface for a database. We only had to implement a new database subclass that uses the web service.
-    – Which pattern or architectural style did you use for the tasks (if any) ?
-    We did not use any pattern.
-    – With respect to second part of Exercise 1 (Analysing the results of the two
-    web services): How did you integrate the results in the web portal application?
-    Which element in your architecture is responsible, and what are the benefits
-    and drawbacks of your design?
-    The database layer is responsible. Benefit : the application layer does not know anything about the webservice. Drawback : can't choose whether to query web services or not.
+\subsection{How did your refactoring from the last assignment help or hinder you with this task ?}
+We already had an interface for a \texttt{RegularDatabase}. We only had to provide a new implementation, and plug it directly to the \texttt{DatabaseFacade}. However, we did not add a factory method for this new class, because the database facade always has to create a concrete object of this class.
+
+\subsection{Which pattern or architectural style did you use to make this task (if any) ?}
+We used the service-oriented achitecture, as we were asked to combine the result of other fixed webservices into our new one.
+
+\subsection{With respect to second part of Exercise 1 (Analysing the results of the two web services): How did you integrate the results in the web portal application ?
+Which element in your architecture is responsible, and what are the benefits and drawbacks of your design ?}
+Our new Webservice \texttt{RegularDatabase} implementation calls the Books Web Service, then transform its result in a list of \texttt{softarch.data.Book}, as required by the interface. It is therefore the only component affected by any change in the Books web service.
 
 \section{Exercise 3 : Architecture}
 
