@@ -6,7 +6,7 @@
 
     \subsubsection{Fix the error. Give a brief summary of your changes in the report. Document changes in other files, if necessary}
 
-    We had to change the PortType of the National Library web service in the BPEL process WSDL file to the correct PortType used in the National Library WSDL file.
+    We had to change the port type of the \texttt{InvokeSearchForBooks} task in the BPEL process to the one defined in the National Library description (\url{http://localhost:8181/NationalLibrary/services/LibraryService?wsdl}): \texttt{LibraryService}. Since it is imported in the \texttt{nl} namespace in our BPEL file, we have to write \texttt{nl:LibraryService}.
 
     \subsubsection{Using BPEL constructs, explain what happens in AssignResultSoftLib near the end of the process file}
 
