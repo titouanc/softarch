@@ -56,8 +56,21 @@ Our new Webservice \texttt{RegularDatabase} implementation calls the Books Web S
     portal application. Also minimally depict your architecture which results from
     your design choices in exercise 2.
 
+    \begin{figure}[p]
+      \includegraphics[width=\textwidth]{sequence.eps}
+      \caption{\label{fig:before}Sequence diagram of the web services architecture}
+    \end{figure}
+
+    \begin{figure}[p]
+      \includegraphics[width=\textwidth]{database.eps}
+      \caption{\label{fig:before}Class diagram of the dependency between the database facade and the database implementations}
+    \end{figure}
+
     • Briefly describe your diagram and name the relevant concepts/architectural styles.
     Do not go into the details for responsible classes etc., the architecture has to show
     logical components, not primarily implementation details. Often you will have no
     control over available web services, so treat the library web services as if they where
     provided by external providers.
+
+    The web portal uses the LibrarySearch web service as an abstraction for the two library web services.
+    The database facade in the web portal aggregates the results from the local database and the web service. The local database can still be chosen from a SQL or a JSON database but the web service database results are always added.
