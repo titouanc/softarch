@@ -65,5 +65,5 @@ The benefit of putting the code in the database layer is that the use of a webse
       \caption{\label{fig:class} Our updated class diagram}
     \end{figure}
 
-    The web portal uses the LibrarySearch web service as an abstraction for the two library web services. This is a Service Oriented Architecture because the web portal only knows an interface where it can retrieve data.
-    The database facade in the web portal aggregates the results from the local database and the web service. The local database can still be chosen from a SQL or a JSON database but the web service database results are always added. This happens seemlessly as if all the data was on a local database.
+    The web portal uses the LibrarySearch web service as an abstraction for the two library web services. This is a Service Oriented Architecture because the web portal only knows an interface where it can retrieve data. \ref{fig:sequence} \\
+    The database facade in the web portal aggregates the results from the local database and the web service. The local database can still be chosen from a SQL or a JSON database but the web service database results are always added. This happens seemlessly as if all the data was on a local database. \ref{fig:database}
