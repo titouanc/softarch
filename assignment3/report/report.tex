@@ -15,6 +15,10 @@
 \subsubsection{Find out why this is the case, and correct the problem so that SOFT Library searcher returns books in English as well. Document the solution in the
 report}
 
+The BPEL process uses an xsl transformation stylesheet to combine the ouptuts from the two providers libraries into one. One of the template matching tags is an XPath query for all books in english (\texttt{<xsl:template match="//book[language='en']"></xsl:template>}). As this tag is empty, it replaces any book in english with nothing, and therefore we only see books in french. However, if the Soft Lab Library contained books in other languages, we would see them in the query result.
+
+To obtain books in all language, it is sufficient to remove this tag, as the previous rewrite rule will match and return all nodes.
+
 \subsubsection{Analyse the data that the two web services return. Are they the same? Why
 could this be a problem in a system? What is a possible solution ?}
 
