@@ -2,7 +2,7 @@
 
 \subsection{Correct the error about the PortType}
     \subsubsection{What is the Port Type of a Webservice ? Why is it important for the LibrarySearch BPEL process ?}
-    It is the abstract interface that a web service implements. 
+    A web service Port Type is the abstract interface for a web service component. It define the name, input, failure and output of the operations a webservice of this port type should implement. These implementations are provided through bindings.
 
     \subsubsection{Fix the error. Give a brief summary of your changes in the report. Document changes in other files, if necessary}
 
@@ -23,8 +23,7 @@ To obtain books in all language, it is sufficient to remove this tag, as the pre
 \subsubsection{Analyse the data that the two web services return. Are they the same? Why
 could this be a problem in a system? What is a possible solution ?}
 
-    \subsubsection{Analyse the data that the two web services return. Are they the same? Why could this be a problem in a system ? What is a possible solution ?}
-    The data are not the same. The problem is that there can be parsing problems. And if a third web service is added it might return yet another data structure. The solution is to use XSLT in the BPEL process to return the same data structure whatever the service.
+The data are not the same. The problem is that there can be parsing problems. And if a third web service is added it might return yet another data structure. The solution is to use XSLT in the BPEL process to return the same data structure whatever the service.
 
 \section{Exercise 2 : Integration with Legacy Software}
 
