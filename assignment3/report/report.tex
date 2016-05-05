@@ -50,13 +50,6 @@ Our new Webservice \texttt{RegularDatabase} implementation calls the Books Web S
 The benefit of putting the code in the database layer is that the use of a webservice is hidden from the application layer. The problem is that the results from the webservices are always aggregated : there is no way for the application layer to discard them.
 
 \section{Exercise 3 : Architecture}
-
-    • Chose an appropriate visualization, for example a UML or block diagram. The
-    diagram should allow to see the connections between the relevant elements in this
-    architecture, e.g., the involved web services, and the relevant parts of the web
-    portal application. Also minimally depict your architecture which results from
-    your design choices in exercise 2.
-
     \begin{figure}[p]
       \includegraphics[width=\textwidth]{sequence.eps}
       \caption{\label{fig:sequence}Sequence diagram of the web services architecture}
@@ -72,11 +65,5 @@ The benefit of putting the code in the database layer is that the use of a webse
       \caption{\label{fig:class} Our updated class diagram}
     \end{figure}
 
-    • Briefly describe your diagram and name the relevant concepts/architectural styles.
-    Do not go into the details for responsible classes etc., the architecture has to show
-    logical components, not primarily implementation details. Often you will have no
-    control over available web services, so treat the library web services as if they where
-    provided by external providers.
-
-    The web portal uses the LibrarySearch web service as an abstraction for the two library web services.
-    The database facade in the web portal aggregates the results from the local database and the web service. The local database can still be chosen from a SQL or a JSON database but the web service database results are always added.
+    The web portal uses the LibrarySearch web service as an abstraction for the two library web services. This is a Service Oriented Architecture because the web portal only knows an interface where it can retrieve data.
+    The database facade in the web portal aggregates the results from the local database and the web service. The local database can still be chosen from a SQL or a JSON database but the web service database results are always added. This happens seemlessly as if all the data was on a local database.
