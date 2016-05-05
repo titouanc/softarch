@@ -1,27 +1,24 @@
 \section{Exercise 1 : BPEL Processes}
 
 \subsection{Correct the error about the PortType}
-    \subsubsection{What is the Port Type of a Webservice ? Why is it important for the LibrarySearch BPEL process ?}
-    A web service Port Type is the abstract interface for a web service component. It define the name, input, failure and output of the operations a webservice of this port type should implement. These implementations are provided through bindings.
+\subsubsection{What is the Port Type of a Webservice ? Why is it important for the LibrarySearch BPEL process ?}
+A web service Port Type is the abstract interface for a web service component. It define the name, input, failure and output of the operations a webservice of this port type should implement. These implementations are provided through bindings.
 
-    \subsubsection{Fix the error. Give a brief summary of your changes in the report. Document changes in other files, if necessary}
+\subsubsection{Fix the error. Give a brief summary of your changes in the report. Document changes in other files, if necessary}
 
-    We had to change the port type of the \texttt{InvokeSearchForBooks} task in the BPEL process to the one defined in the National Library description (\url{http://localhost:8181/NationalLibrary/services/LibraryService?wsdl}): \texttt{LibraryService}. Since it is imported in the \texttt{nl} namespace in our BPEL file, we have to write \texttt{nl:LibraryService}.
+We had to change the port type of the \texttt{InvokeSearchForBooks} task in the BPEL process to the one defined in the National Library description (\url{http://localhost:8181/NationalLibrary/services/LibraryService?wsdl}): \texttt{LibraryService}. Since it is imported in the \texttt{nl} namespace in our BPEL file, we have to write \texttt{nl:LibraryService}.
 
-    \subsubsection{Using BPEL constructs, explain what happens in AssignResultSoftLib near the end of the process file}
-    The XML data from the webservice is transformed using the "books.xsl" XSLT file.
+\subsubsection{Using BPEL constructs, explain what happens in AssignResultSoftLib near the end of the process file}
+In this task, we assign the result value to the response object, just before sending it to the caller. The result value is built from the responses of the two other services, described in a transformation language: XSLT.
 
 \subsection{Notice that the SOFT Library only returns books in French, even though it has English books as well}
+\subsubsection{Find out why this is the case, and correct the problem so that SOFT Library searcher returns books in English as well. Document the solution in the report}
 
-    \subsubsection{Find out why this is the case, and correct the problem so that SOFT Library searcher returns books in English as well. Document the solution in the
-    report}
-
-The BPEL process uses an xsl transformation stylesheet to combine the ouptuts from the two providers libraries into one. One of the template matching tags is an XPath query for all books in english (\texttt{<xsl:template match="//book[language='en']"></xsl:template>}). As this tag is empty, it replaces any book in english with nothing, and therefore we only see books in french. However, if the Soft Lab Library contained books in other languages, we would see them in the query result.
+The BPEL process uses an xsl transformation stylesheet to combine the ouptuts from the two providers libraries into one. One of the template matching tags is an XPath query for all books in english (\texttt{<xsl:template match="//book[language='en']"></xsl:template>}). As this tag is empty, it replaces any book in english with nothing, and therefore we only see books in french. However, if the Soft Lab Library contained books in other languages than french or english, we would see them in the query result.
 
 To obtain books in all language, it is sufficient to remove this tag, as the previous rewrite rule will match and return all nodes.
 
-\subsubsection{Analyse the data that the two web services return. Are they the same? Why
-could this be a problem in a system? What is a possible solution ?}
+\subsubsection{Analyse the data that the two web services return. Are they the same? Why could this be a problem in a system? What is a possible solution ?}
 
 The data are not the same. The problem is that there can be parsing problems. And if a third web service is added it might return yet another data structure. The solution is to use XSLT in the BPEL process to return the same data structure whatever the service.
 
