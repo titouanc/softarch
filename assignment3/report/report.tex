@@ -4,7 +4,9 @@
     \subsubsection{What is the Port Type of a Webservice ? Why is it important for the LibrarySearch BPEL process ?}
     It is the abstract interface that a web service implements. 
 
-    \subsubsection{Fix the error. Give a brief summary of your changes in the report. Document changes in other files, if necessary.}
+    \subsubsection{Fix the error. Give a brief summary of your changes in the report. Document changes in other files, if necessary}
+
+    We had to change the PortType of the National Library web service in the BPEL process WSDL file to the correct PortType used in the National Library WSDL file.
 
     \subsubsection{Using BPEL constructs, explain what happens in AssignResultSoftLib near the end of the process file}
 
@@ -13,19 +15,22 @@
     \subsubsection{Find out why this is the case, and correct the problem so that SOFT Library searcher returns books in English as well. Document the solution in the
     report}
 
-    \subsubsection{Analyse the data that the two web services return. Are they the same? Why
-    could this be a problem in a system? What is a possible solution ?}
+    \subsubsection{Analyse the data that the two web services return. Are they the same? Why could this be a problem in a system ? What is a possible solution ?}
+    The data are not the same. The problem is that there can be parsing problems. And if a third web service is added it might return yet another data structure. The solution is to use XSLT in the BPEL process to return the same data structure whatever the service.
 
 \section{Exercise 2 : Integration with Legacy Software}
 
     – What did you change in the web portal application?
+    The \textt{DatabaseFacade} method \texttt{findRecords}. We added a \texttt{RegularDatabase} implementation for the web service (\texttt{WebserviceRegularDatabase}). The latter is an attribute of the \texttt{DatabaseFacade}
     – How did your refactoring from the last assignment help or hinder you with
     this task?
-    – Which pattern or architectural style did you use for the tasks (if any)?
+    It did not help at all. Point.
+    – Which pattern or architectural style did you use for the tasks (if any) ?
     – With respect to second part of Exercise 1 (Analysing the results of the two
     web services): How did you integrate the results in the web portal application?
     Which element in your architecture is responsible, and what are the benefits
     and drawbacks of your design?
+    The daatabase layer is responsible. Benefit : the application layer does not know anything about the webservice. Drawback : can't choose whether to query web services or not.
 
 \section{Exercise 3 : Architecture}
 
