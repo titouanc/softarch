@@ -29,14 +29,14 @@ The data from the two library webservices are nearly identical but differ in two
 This is a problem because our application has to process distinctly the results of the two sources, even if the intermediate BPEL process aggregates them. We propose 2 solutions to this problem:
 
 \begin{itemize}
-  \item The SOFT and national libraries both aggree on a common web service port type, and therefore return their records in the same format. This is however not likely to happen because two different products have to be modified and the complexity of this process increases as more libraries would want to participate.
+  \item The SOFT and National libraries both aggree on a common web service port type, and therefore return their records in the same format. This is however not likely to happen because two different products have to be modified and the complexity of this process increases as more libraries would want to participate.
   \item The XSL transformation occuring at the end of the BPEL process could be enhanced to normalize the data from the two source in a coherent book list.
 \end{itemize}
 
 
 \section{Exercise 2 : Integration with Legacy Software}
 \subsection{What did you change in the web portal application?}
-We choosed to add the webservice access in the database layer. We added a new package: \texttt{softarch.portal.db.webservice}, which only contains a \texttt{WebServiceRegularDatabase}, analogous to the \texttt{JSONRegularDatabase} from previous assignment. This class only implements two methods: \texttt{findRecords} and \texttt{getNumberOfRegularRecords}, and raise \texttt{DatabaseException} for all others operations. Finally, the \texttt{DatabaseFacade} class holds a private reference to a \texttt{WebServiceDatabase}, and add results from this service when its implemented methods are used on the database.
+We chose to add the webservice access in the database layer. We added a new package: \texttt{softarch.portal.db.webservice}, which only contains a \texttt{WebServiceRegularDatabase}, analogous to the \texttt{JSONRegularDatabase} from previous assignment. This class only implements two methods: \texttt{findRecords} and \texttt{getNumberOfRegularRecords}, and raise \texttt{DatabaseException} for all others operations. Finally, the \texttt{DatabaseFacade} class holds a private reference to a \texttt{WebServiceDatabase}, and add results from this service when its implemented methods are used on the database.
 
 \subsection{How did your refactoring from the last assignment help or hinder you with this task ?}
 We already had an interface for a \texttt{RegularDatabase}. We only had to provide a new implementation, and plug it directly to the \texttt{DatabaseFacade}. However, we did not add a factory method for this new class, because the database facade always has to create a concrete object of this class.
@@ -47,6 +47,7 @@ We used the service-oriented achitecture, as we were asked to combine the result
 \subsection{With respect to second part of Exercise 1 (Analysing the results of the two web services): How did you integrate the results in the web portal application ?
 Which element in your architecture is responsible, and what are the benefits and drawbacks of your design ?}
 Our new Webservice \texttt{RegularDatabase} implementation calls the Books Web Service, then transform its result in a list of \texttt{softarch.data.Book}, as required by the interface. It is therefore the only component affected by any change in the Books web service.
+The benefit of putting the code in the database layer is that the use of a webservice is hidden from the application layer. The problem is that the results from the webservices are always aggregated : there is no way for the application layer to discard them.
 
 \section{Exercise 3 : Architecture}
 
