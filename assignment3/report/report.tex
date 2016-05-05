@@ -31,13 +31,14 @@ The data are not the same. The problem is that there can be parsing problems. An
     The \texttt{DatabaseFacade} method \texttt{findRecords}. We added a \texttt{RegularDatabase} implementation for the web service (\texttt{WebserviceRegularDatabase}). The latter is an attribute of the \texttt{DatabaseFacade}
     – How did your refactoring from the last assignment help or hinder you with
     this task?
-    It did not help at all. Point.
+    We already had an interface for a database. We only had to implement a new database subclass that uses the web service.
     – Which pattern or architectural style did you use for the tasks (if any) ?
+    We did not use any pattern.
     – With respect to second part of Exercise 1 (Analysing the results of the two
     web services): How did you integrate the results in the web portal application?
     Which element in your architecture is responsible, and what are the benefits
     and drawbacks of your design?
-    The daatabase layer is responsible. Benefit : the application layer does not know anything about the webservice. Drawback : can't choose whether to query web services or not.
+    The database layer is responsible. Benefit : the application layer does not know anything about the webservice. Drawback : can't choose whether to query web services or not.
 
 \section{Exercise 3 : Architecture}
 
