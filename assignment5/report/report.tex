@@ -1,12 +1,15 @@
 \section{a}
 
+This values were compared with the example seen in class.
+
 \begin{itemize}
-    \item ANDC too high -> high coupling, adding features more difficult, maintenance
-    \item AHH too high -> takes more time to compute (overloading) + ^
-    \item NOM/NOC -> see below
+    \item ANDC too high -> high coupling, adding features more difficult, maintenance, subclass coupling
+    \item AHH too high -> takes more time to compute (overloading) + \^ TO MUCH INHERITANCE
+    \item NOM/NOC -> see below + small project -> not many methods
     \item LOC/NOM -> few methods per class but many lines per method => shoud refactor to have more modular methods
-    \item CYCLO/LOC -> flat code -> good because less tests -> declarative language ???
-    \item FANOUT/CALL + CALL/NOM -> low coupling because on average each method uses 1.5 class
+    \item CYCLO/LOC -> flat code -> good because less tests -> mainly adding/storing data -> declarative language ???
+    \item CALL/NOM -> high but low FANOUT/CALL denotes that mostly operations from same class are called. so good coupling
+    \item FANOUT/CALL -> low coupling thanks to facades
 \end{itemize}
 
 \begin{itemize}
