@@ -1,0 +1,79 @@
+module Families2ExtendedFamilies;
+
+create OUT: ExtendedFamilies from IN: Families;
+
+
+-- Helpers --
+-- Member.isFemale -> bool
+helper context Families!Member def: isFemale: Boolean =
+	if not self.familyMother.oclIsUndefined() then true
+	else not self.familyDaughter.oclIsUndefined() endif;
+
+-- Member.isChild -> bool
+helper context Families!Member def: isChild: Boolean =
+	if not self.familySon.oclIsUndefined() then true
+	else not self.familyDaughter.oclIsUndefined() endif;
+
+-- Member.family -> Family
+helper context Families!Member def: family: Families!Family =
+	Set{self.familyFather, self.familyMother, self.familySon, self.familyDaughter}
+       ->any(f | not f.oclIsUndefined());
+
+-- Family.members -> [Person]
+helper context Families!Family def: members: Set(Families!Member) =
+	self.sons->union(self.daughters)
+	         ->including(self.father)->including(self.mother)
+			 ->reject(x | x.oclIsUndefined());
+
+
+-- Rules --
+-- Translate Families from the Families metamodel to FamiliesExtended metamodel
+rule Family2Family {
+	from s: Families!Family
+	to t: ExtendedFamilies!Family (
+		lastName <- s.lastName,
+		noOfChildren <- s.members->select(x | x.isChild)->size(),
+		isSingleParent <- (if s.members->select(x | not x.isChild)->size() = 1 then true else false endif)
+	)
+}
+
+-- Translate a Member to a Person (abstract part: family and first name)
+abstract rule Member2Person {
+	from s: Families!Member
+	to t: ExtendedFamilies!Person (
+		firstName <- s.firstName,
+		family <- s.family
+	)
+}
+
+-- Translate a Member to a concrete Male with children
+rule Member2Father extends Member2Person {
+	from s: Families!Member (not s.isFemale and not s.isChild)
+	to t: ExtendedFamilies!Male (
+		children <- s.family.members->select(x | x.isChild)	
+	)
+}
+
+-- Translate a Member to a concrete Male with parents
+rule Member2Son extends Member2Person {
+	from s: Families!Member (not s.isFemale and s.isChild)
+	to t: ExtendedFamilies!Male (
+		parents <- s.family.members->select(x | not x.isChild)
+	)
+}
+
+-- Translate a Member to a concrete Female with children
+rule Member2Mother extends Member2Person {
+	from s: Families!Member (s.isFemale and not s.isChild)
+	to t: ExtendedFamilies!Female (
+		children <- s.family.members->select(x | x.isChild)
+	)
+}
+
+-- Translate a Member to a concrete Female with parents
+rule Member2Daughter extends Member2Person {
+	from s: Families!Member (s.isFemale and s.isChild)
+	to t: ExtendedFamilies!Female (
+		parents <- s.family.members->select(x | not x.isChild)
+	)
+}
