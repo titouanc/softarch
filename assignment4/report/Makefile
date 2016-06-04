@@ -1,6 +1,6 @@
 FIGURES = $(subst .dia,.eps,$(wildcard *.dia))
 
-Antoine-Carpentier_Titouan-Christophe_1.pdf: main.pdf
+Antoine-Carpentier_Titouan-Christophe_4.pdf: main.pdf
 	mv $< $@
 
 %.pdf: %.tex report.tex ${FIGURES}
