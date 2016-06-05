@@ -98,7 +98,7 @@ It is very interesting because it shows for each class if it respect the interfa
 
 \subsection{Length of name class depending on size class}
 \ref{fig:namelength} shows no correlation between the length of the name of a class and the size of the said class. The size of the class is computed in terms of number of attributes and number of methods.
-However it shows a correlation between the position of a class in the hierarchy and the length of its name. The more a class is down in the hierarchy the longer its name. Classes that don't belong to a hierarchy (they have no superclass and no subclass) also have a long name, as if they were down a 1-level hierarchy.
+However it shows a correlation between the position of a class in the hierarchy and the length of its name. The more a class is down in the hierarchy the longer its name. Classes that don't belong to a hierarchy (they have no superclass and no subclass) also have a long name, as if they were down a 1-level hierarchy. This is good for productivity because if inheritance and polymorphism are well used, the programmer should write down the name of a subclass only when an object is created and use the name of the superclass everywhere else. The shorter the name of superclasses the more time the programmer saves. If this result also holds for abstract factory classes names, using abstract factory to create said objects can reduces even more the time the programmer spends writing class names.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{namelength.png}
     \caption{\label{fig:namelength} System complexity diagram : class name length in function of class size}
