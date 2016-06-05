@@ -44,6 +44,7 @@ The project scores particularly well on the CYCLO, NOM and FANOUT metrics. Overa
 \section{System attraction}
 On the figure below, classes are represented as big black dots, methods as red dots and attributes as blue dots. The lines show the use of class methods and attributes by other classes and methods. In order to obtain this diagram in Moose, we choose the category \textbf{All model classes}, then select \texttt{Visulaize > System attraction}
 
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{Attraction_annotated.png}
     \caption{\label{fig:attraction} Attraction diagram}
@@ -83,3 +84,22 @@ The \texttt{ApplicationFacade} (cluster \texttt{(a)}) and the \texttt{DatabaseFa
 The data classes (cluster \texttt{(5)}) are also clearly identifiable. They are mostly accessed through the databases (cluster \texttt{(4)}). We attribute the \textit{spider web} feeling around the cluster to the tests cases (below cluster \texttt{(4)}). These data classes are essentially models (high number of attributes, few methods) as it can be seen in the small yellow clusters.
 
 \section{Custom system complexity}
+
+\subsection{Good use of inheritance}
+
+\ref{fig:numberofmethds} shows the number of inherited methods per class compared to the number of methods in their hierarchy and their number of public methods.
+It is very interesting because it shows for each class if it respect the interface inherited from it superclass. One of the main advantages of inheritance is the ability to use polymorphism and thus each subclass must have the same interface as its siblings.
+
+\todo{change diagram to NMinherit/NMadded/NMpublic or NMinherit/NMoverrid/NMadded}
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{numberofmethods2.png}
+    \caption{\label{fig:numberofmethods} System complexity diagram : respect of interface in subclasses}
+\end{figure}
+
+\subsection{Length of name class depending on size class}
+\ref{fig:namelength} shows no correlation between the length of the name of a class and the size of the said class. The size of the class is computed in terms of number of attributes and number of methods.
+However it shows a correlation between the position of a class in the hierarchy and the length of its name. The more a class is down in the hierarchy the longer its name. Classes that don't belong to a hierarchy (they have no superclass and no subclass) also have a long name, as if they were down a 1-level hierarchy.
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{namelength.png}
+    \caption{\label{fig:namelength} System complexity diagram : class name length in function of class size}
+\end{figure}
