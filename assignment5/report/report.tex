@@ -28,7 +28,7 @@ scores well on CYCLO NOM FANOUT
 
 \subsection{Screenshots}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \includegraphics[width=\textwidth]{OverviewPyramid_annotated.png}
     \caption{\label{fig:pyramid}Overview pyramid with emphasis on important points}
 \end{figure}
@@ -40,24 +40,32 @@ scores well on CYCLO NOM FANOUT
 \end{enumerate}
 
 \section{System attraction}
-\begin{figure}[h]
+On the figure below, classes are represented as big black dots, methods as red dots and attributes as blue dots. The lines show the use of class methods and attributes by other classes and methods.
+
+\begin{figure}[H]
     \includegraphics[width=\textwidth]{Attraction_annotated.png}
     \caption{\label{fig:attraction} Attraction diagram}
 \end{figure}
 
-\begin{enumerate}
+\begin{minipage}{0.7\textwidth}
+  \begin{enumerate}
     \item InternetFrontend
     \item Pages (LoginPage, QueryPage, ...)
     \item Managers (UserManager, ApplicationManager, ...)
     \item Databases (RawDatabase, RegularDatabase)
     \item Database entries (Book, Article, ...)
     \item Registrations (Administrator, CheapSubscription, ...)
-\end{enumerate}
-
-\begin{enumerate}
+  \end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}{0.3\textwidth}
+  \begin{enumerate}[label=\alph*]
     \item ApplicationFacade
     \item DatabaseFacade
     \item Data
-\end{enumerate}
+    \item UserProfile accessors
+  \end{enumerate}
+\end{minipage}
+
+\paragraph*{}\textit{The other classes are not relevant for a complex system analysis (unit tests for instance).}
 
 \section{Custom system complexity}
