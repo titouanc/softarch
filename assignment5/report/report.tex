@@ -1,32 +1,34 @@
 \section{Overview pyramid}
 
-\subsection{On what metrics does the system scores well or bad. How does it impact quality attributes ?}
+\subsection{On what metrics does the system scores well or bad. How does it impact quality attributes ? What is the impact of the systems score on these metrics on quality attributes
+such as maintainability, extensibility... ?}
 
 \begin{itemize}
-    \item ANDC too high -> high coupling, adding features more difficult, maintenance, subclass coupling
-    \item AHH too high -> takes more time to compute (overloading) + \^ TO MUCH INHERITANCE
-    \item NOM/NOC -> see below + small project -> not many methods -> ++ maintenance extensible
-    \item LOC/NOM -> few methods per class but many lines per method => shoud refactor to have more modular methods -- maintenance extensible
-    \item CYCLO/LOC -> flat code -> good because less tests -> mainly adding/storing data -> declarative language ??? ++ maintenance extensible
-    \item CALL/NOM -> high but low FANOUT/CALL denotes that mostly operations from same class are called. so good coupling ++ maintenance extensible
-    \item FANOUT/CALL -> low coupling thanks to facades ++ maintenance extensible
+    \item The ANDC metric is too high. It denotes high subclass coupling which makes adding features in subclasses more diffcult. It is also more difficult to maintain a large hierarchy of classes
+    \item The AHH metric is too high. It takes more time to compute due to dynamic binding of overrided methods
+    \item The NOM/NOC metric is low because the project is small. There are not many methods. The project is thus easily extensible but care should be taken that this metric stay low
+    \item The LOC/NOM metric is high thus the methods should be split into more modular methods to improve maintenance. This can be done without impact on the quality of the code because the previous metric (NOM/NOC) is low
+    \item The CYCLO/LOC metric is low because the code is very flat. It is good because there are less edge cases to test. The code is easy to understand and maintain. The project mainly consists in adding and storing data in a database.
+    \item The CALL/NOM metric is high but the FANOUT/CALL metric is low. It denotes that operations mostly use operations from the same class. The coupling is thus low and it helps maintenance and extensibility.
+    \item The FANOUT/CALL is low because thanks to facades the code is well decoupled.
 \end{itemize}
 
-scores well on CYCLO NOM FANOUT
+The project scores particularly well on the CYCLO, NOM and FANOUT metrics. Overall it means that the code is flat with a low number of methods that call mainly methods from the same class.
 
 \subsection{How is each metric computed ?}
 
 \begin{itemize}
-    \item ANDC : average number of derived classes
-    \item AHH : average hierarchy height
-    \item NOM/NOC : number of methods / class
-    \item LOC/NOM : number of lines of code / method
-    \item CYCLO/LOC : proportion of lines of codes that are conditional branchement
-    \item FANOUT : number of classes called in operations
-    \item CALL : number of operations called from other operations (only one is counted per operation)
+    \item ANDC : computes the sum of the number of derived class for each superclass and divide by the number of classes
+    \item AHH : computes for each class with no parent (called root class) the number of classes to the lowest subclass and divide by the number of root classes
+    \item NOM : compute the sum of the number of methods of each class
+    \item NOC : the number of classes
+    \item LOC : the number of lines of code without comments lines
+    \item CYCLO : create a tree of all the condition branchments in the code and compute the number of leaves of the tree
+    \item FANOUT : compute the sum of distinct classes used in each operation
+    \item CALL : compute number of distinct other operations called in each operation
 \end{itemize}
 
-\subsection{Screenshots}
+\subsection{Important points on the overview pyramid diagram}
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{OverviewPyramid_annotated.png}
@@ -34,9 +36,9 @@ scores well on CYCLO NOM FANOUT
 \end{figure}
 
 \begin{enumerate}
-    \item Hierarchy is too big in both width and height. It denotes a strong coupling. The same features could probably be reached without inheritance
-    \item Number of methods is good because it is not high but number of lines of code is too high. This could be fixed by splitting methods into smaller ones.
-    \item Not many conditional branchements is very good for testing (both unit tests and integration tests) and to read and understand the code.
+    \item The hierarchy is too big in both width and height. It denotes a strong subclass coupling. The same features could probably be reached without inheritance.
+    \item The number of lines of code per method is too high. Because the number of methods is not high, each method could be split into smaller methods to increase modularity and facilitate maintenance and extensibility.
+    \item There are not many conditional branchements, which is very good for both unit tests and integration tests. It also facilitates the reading and understanding of the code.
 \end{enumerate}
 
 \section{System attraction}
