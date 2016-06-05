@@ -87,19 +87,22 @@ The data classes (cluster \texttt{(5)}) are also clearly identifiable. They are 
 
 \subsection{Good use of inheritance}
 
-\ref{fig:numberofmethds} shows the number of inherited methods per class compared to the number of methods in their hierarchy and their number of public methods.
+Figure \ref{fig:numberofmethods} shows the number of inherited methods per class compared to the number of methods in their hierarchy and their number of public methods.
 It is very interesting because it shows for each class if it respect the interface inherited from it superclass. One of the main advantages of inheritance is the ability to use polymorphism and thus each subclass must have the same interface as its siblings.
+
+The two facades are clearly visible: these are the 2 black horizontal recangles. They do not inherit methods, but define a large amount of new ones. These facade are, in fact, a collection of methods.
 
 \todo{change diagram to NMinherit/NMadded/NMpublic or NMinherit/NMoverrid/NMadded}
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{numberofmethods2.png}
-    \caption{\label{fig:numberofmethods} System complexity diagram : respect of interface in subclasses}
+    \caption{\label{fig:numberofmethods} Custom system complexity diagram. \textbf{Height:} number of inherited methods; \textbf{width:} number of methods in hierarchy; \textbf{color:} number of public methods}
 \end{figure}
 
 \subsection{Length of name class depending on size class}
-\ref{fig:namelength} shows no correlation between the length of the name of a class and the size of the said class. The size of the class is computed in terms of number of attributes and number of methods.
+Figure \ref{fig:namelength} shows no correlation between the length of the name of a class and the size of the said class. The size of the class is computed in terms of number of attributes and number of methods.
 However it shows a correlation between the position of a class in the hierarchy and the length of its name. The more a class is down in the hierarchy the longer its name. Classes that don't belong to a hierarchy (they have no superclass and no subclass) also have a long name, as if they were down a 1-level hierarchy. This is good for productivity because if inheritance and polymorphism are well used, the programmer should write down the name of a subclass only when an object is created and use the name of the superclass everywhere else. The shorter the name of superclasses the more time the programmer saves. If this result also holds for abstract factory classes names, using abstract factory to create said objects can reduces even more the time the programmer spends writing class names.
+
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{namelength.png}
-    \caption{\label{fig:namelength} System complexity diagram : class name length in function of class size}
+    \caption{\label{fig:namelength} Custom system complexity diagram. \textbf{Height:} number of methods; \textbf{width:} number of attributes; \textbf{color:} name length}
 \end{figure}
