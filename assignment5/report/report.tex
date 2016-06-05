@@ -1,8 +1,6 @@
-\section{a}
+\section{Overview pyramid}
 
-\subsection{1 + 3}
-
-This values were compared with the example seen in class.
+\subsection{On what metrics does the system scores well or bad. How does it impact quality attributes ?}
 
 \begin{itemize}
     \item ANDC too high -> high coupling, adding features more difficult, maintenance, subclass coupling
@@ -16,7 +14,8 @@ This values were compared with the example seen in class.
 
 scores well on CYCLO NOM FANOUT
 
-\subsection{2}
+\subsection{How is each metric computed ?}
+
 \begin{itemize}
     \item ANDC : average number of derived classes
     \item AHH : average hierarchy height
@@ -27,10 +26,10 @@ scores well on CYCLO NOM FANOUT
     \item CALL : number of operations called from other operations (only one is counted per operation)
 \end{itemize}
 
-\subsection{4}
+\subsection{Screenshots}
 
 \begin{figure}[h]
-    \includegraphics{OverviewPyramid_annotated.png}[width=\textwidth]
+    \includegraphics[width=\textwidth]{OverviewPyramid_annotated.png}
     \caption{\label{fig:pyramid}Overview pyramid with emphasis on important points}
 \end{figure}
 
@@ -40,6 +39,25 @@ scores well on CYCLO NOM FANOUT
     \item Not many conditional branchements is very good for testing (both unit tests and integration tests) and to read and understand the code.
 \end{enumerate}
 
-\section{b}
+\section{System attraction}
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{Attraction_annotated.png}
+    \caption{\label{fig:attraction} Attraction diagram}
+\end{figure}
 
-\section{c}
+\begin{enumerate}
+    \item InternetFrontend
+    \item Pages (LoginPage, QueryPage, ...)
+    \item Managers (UserManager, ApplicationManager, ...)
+    \item Databases (RawDatabase, RegularDatabase)
+    \item Database entries (Book, Article, ...)
+    \item Registrations (Administrator, CheapSubscription, ...)
+\end{enumerate}
+
+\begin{enumerate}
+    \item ApplicationFacade
+    \item DatabaseFacade
+    \item Data
+\end{enumerate}
+
+\section{Custom system complexity}
